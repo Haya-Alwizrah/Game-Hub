@@ -25,6 +25,9 @@ class HexaPown:
                 self._print_board()
                 self.player = "O" if self.player == "X" else "X"
 
+        self.player = "O" if self.player == "X" else "X"      
+        print(f"Game Over! '{self.player}' wins!" if self.win else f"Game Over! No available moves for '{self.player}'.")
+
     def _print_board(self):
         for i in self.board:
             print(i)
