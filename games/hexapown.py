@@ -30,7 +30,7 @@ class HexaPown:
         for i in self.board:
             print(i)
 
-    def _players_position(self):
+    def _players_position(self) -> list[tuple]:
         x_position = []
         o_position = []
         for i, row in enumerate(self.board):
@@ -41,10 +41,10 @@ class HexaPown:
                     o_position.append((i,j))
         return x_position, o_position
 
-    def _inside_board(self, i, j):
+    def _inside_board(self, i:int, j:int)-> bool:
         return 0 <= i < 3 and 0 <= j < 3
 
-    def _available_moves(self):
+    def _available_moves(self)-> list[tuple[tuple]]:
         x_position, o_position = self._players_position()
         if self.player == "X":
             move_dirction = 1
@@ -69,22 +69,24 @@ class HexaPown:
 
         return available_moves
 
-    def _check_normal_win(self):
-        if "X" in self.board[2] or "O" in self.board[0]:
-            self.player = "O" if self.player == "X" else "X"
-            print(f"Game Over! '{self.player}' wins!")
+    def _check_normal_win(self) -> bool:
+        if "X" in self.board[2]:
+            print(f"Game Over! 'X' wins!")
+            return True
+        elif "O" in self.board[0]:
+            print(f"Game Over! 'O' wins!")
             return True
         else:
             return False
         
-    def _check_no_available_move(self, available_moves):
+    def _check_no_available_move(self, available_moves) -> bool:
         if len(available_moves) == 0:
             print(f"Game Over! No available moves for '{self.player}'.")
             return True
         else:
             return False
         
-    def _select_move(self, available_moves):
+    def _select_move(self, available_moves)-> tuple[tuple]:
         print(f"'{self.player}' choose the number of the movement you want:")
         for i, move in enumerate(available_moves):
             print(f"- {i+1}: {move}")
