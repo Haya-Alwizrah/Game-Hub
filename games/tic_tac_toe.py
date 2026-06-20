@@ -1,4 +1,4 @@
-class TecTacToe:
+class TicTacToe:
     def __init__(self):
     # This list represents the XO board
         self.board = ["-", "-", "-",

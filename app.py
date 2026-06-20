@@ -1,8 +1,8 @@
-from hangman import HangmanGame
-from wordle import Wordle
+from games.hangman import HangmanGame
+from games.wordle import Wordle
 #from guessing_number import GuessingNumberGame
-from hexapown import HexaPown
-from tic_tac_toe import TicTacToe
+from games.hexapown import HexaPown
+from games.tic_tac_toe import TicTacToe
 
 hg = HangmanGame()
 wo = Wordle()
