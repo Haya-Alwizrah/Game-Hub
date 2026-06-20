@@ -105,7 +105,3 @@ class HexaPown:
 
         self.board[old_i][old_j] = " "
         self.board[new_i][new_j] = self.player
-
-
-g = HexaPown()
-g.start()

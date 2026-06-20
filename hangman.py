@@ -197,6 +197,3 @@ class HangmanGame:
             return False
 
         return True
-
-c=HangmanGame()
-c.start()

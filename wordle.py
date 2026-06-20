@@ -75,6 +75,3 @@ class Wordle:
       if self.Attemps == 0:
           print(f"Game Over, You Lost")
           print(f"The Word Of Today Is {self.word}")
-
-wo = wordle()
-wo.start()
