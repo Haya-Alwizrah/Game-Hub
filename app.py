@@ -2,13 +2,13 @@ from hangman import HangmanGame
 from wordle import Wordle
 #from guessing_number import GuessingNumberGame
 from hexapown import HexaPown
-# from tic_tac_toe import TicTacToe
+from tic_tac_toe import TicTacToe
 
 hg = HangmanGame()
 wo = Wordle()
 #gn = GuessingNumberGame()
 hp = HexaPown()
-#ttt = TicTacToe()
+ttt = TicTacToe()
 
 print("Welcome to the game hub")
 
@@ -40,8 +40,7 @@ while True:
             if z == 1:
                 hp.start()
             elif z == 2:
-                #ttt.start()
-                pass
+                ttt.start()
             else:
                 print("Invalid Input")
         else:
