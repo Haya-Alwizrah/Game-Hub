@@ -88,20 +88,6 @@ class HexaPown:
             return "O" if self.player == "X"else "X"
         else:
             return None
-        
-    def _select_move(self, available_moves)-> tuple[tuple]:
-        print(f"'{self.player}' choose the number of the movement you want:")
-        for i, move in enumerate(available_moves):
-            print(f"- {i+1}: {move}")
-        user_choose = input()
-
-        while not (user_choose.isdigit() and 1 <= int(user_choose) <= len(available_moves)):
-            print("Invalid input. Please choose a valid number:")
-            user_choose = input()
-
-        for i, move in enumerate(available_moves):
-            if i+1 == int(user_choose):
-                return move
 
     def _move(self, from_pos, to_pos):
         available_moves = self._available_moves()
