@@ -23,10 +23,13 @@ class HexaPown:
             if self.winner != None:
                 print(f"Player '{self.winner}' wins!")
             else:
-                selected_move = self._select_move(available_moves)
-                self._move(selected_move)
+                print(available_moves)
+                from_row = int(input("from row: "))
+                from_col = int(input("from col: "))
+                to_row = int(input("to row: "))
+                to_col = int(input("to col: "))
+                self._move((from_row, from_col),(to_row, to_col))
                 self._print_board()
-                self.player = "O" if self.player == "X" else "X"
 
     def _print_board(self):
         for i in self.board:
@@ -46,7 +49,7 @@ class HexaPown:
     def _inside_board(self, i:int, j:int)-> bool:
         return 0 <= i < 3 and 0 <= j < 3
 
-    def _available_moves(self)-> list[tuple[tuple]]:
+    def _available_moves(self)-> dict[list[tuple]]:
         x_position, o_position = self._players_position()
         if self.player == "X":
             move_dirction = 1
@@ -100,11 +103,21 @@ class HexaPown:
             if i+1 == int(user_choose):
                 return move
 
-    def _move(self, selected_move):
-        old_position, new_position = selected_move
-        old_i , old_j = old_position
-        new_i , new_j = new_position
+    def _move(self, from_pos, to_pos):
+        available_moves = self._available_moves()
+
+        if from_pos not in available_moves or to_pos not in available_moves[from_pos]:
+            return False
+    
+        old_i , old_j = from_pos
+        new_i , new_j = to_pos
 
         self.board[old_i][old_j] = " "
         self.board[new_i][new_j] = self.player
 
+        self.player = "O" if self.player == "X" else "X"
+
+        return True
+
+#x = HexaPown()
+#x.start()
