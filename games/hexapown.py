@@ -57,17 +57,22 @@ class HexaPown:
             position = o_position
             enemy = "X"
 
-        available_moves = []
+        available_moves = {}
 
         for i,j in position:
+            available_moves[(i,j)] = []
+
             new_i, new_j = i+move_dirction, j
             if self._inside_board(new_i, new_j) and self.board[new_i][new_j] == " ":
-                available_moves.append(((i, j), (new_i, new_j)))
+                available_moves[(i,j)].append((new_i, new_j))
 
             for z in (1,-1):
                 new_i, new_j = i+move_dirction, j+z
                 if self._inside_board(new_i, new_j) and self.board[new_i][new_j] == enemy:
-                    available_moves.append(((i, j), (new_i, new_j)))
+                    available_moves[(i,j)].append((new_i, new_j))
+
+            if len(available_moves[(i, j)]) == 0:
+                del available_moves[(i, j)]
 
         return available_moves
 
@@ -102,3 +107,4 @@ class HexaPown:
 
         self.board[old_i][old_j] = " "
         self.board[new_i][new_j] = self.player
+
