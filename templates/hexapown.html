@@ -1,1 +1,20 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Hexapawn Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hexapown.css') }}">
+</head>
+<body>
+
+    <h1>Hexapawn Game</h1>
+    <div class="status" id="status-text">Loading game...</div>
+
+    <div class="board" id="game-board">
+        </div>
+
+    <button class="btn-restart" onclick="resetGame()">Restart Game</button>
+
+    <script src="{{ url_for('static', filename='js/hexapown.js') }}"></script>
+</body>
+</html>

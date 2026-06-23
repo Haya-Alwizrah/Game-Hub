@@ -104,6 +104,18 @@ class HexaPown:
         self.player = "O" if self.player == "X" else "X"
 
         return True
+    
+    def get_state(self):
+        available_moves = self._available_moves()
+        winner = self._check_winner(available_moves)
+        movable_pieces = [list(pos) for pos in available_moves.keys()]
+        
+        return {
+            'board': self.board,
+            'player': self.player,
+            'winner': winner,
+            'movable_pieces': movable_pieces
+        }
 
 #x = HexaPown()
 #x.start()
