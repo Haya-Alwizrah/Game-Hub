@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XO Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>XO Game</h1>
+
+    <h2>{{ status }}</h2>
+
+    <div>
+        {% for cell in board %}
+            {% if cell == "-" and game_running %}
+                <a href="{{ url_for('move', position=loop.index0) }}">
+                    <button>{{ cell }}</button>
+                </a>
+            {% else %}
+                <button disabled>{{ cell }}</button>
+            {% endif %}
+
+            {% if loop.index % 3 == 0 %}
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <a href="{{ url_for('reset') }}">
+        <button>Restart Game</button>
+    </a>
+
+</body>
+</html>
