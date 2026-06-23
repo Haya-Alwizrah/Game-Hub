@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hexapawn Game</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hexapown.css') }}">
 </head>
@@ -10,10 +11,11 @@
     <h1>Hexapawn Game</h1>
     <div class="status" id="status-text">Loading game...</div>
 
-    <div class="board" id="game-board">
-        </div>
+    <div class="board" id="game-board"></div>
 
     <button class="btn-restart" onclick="resetGame()">Restart Game</button>
+    
+    <a href="/multiplayer" class="btn-back">← Back to Two Player Games</a>
 
     <script src="{{ url_for('static', filename='js/hexapown.js') }}"></script>
 </body>

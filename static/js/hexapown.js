@@ -42,9 +42,9 @@ function renderBoard() {
     boardDiv.innerHTML = ''; 
 
     if (currentWinner) {
-        document.getElementById('status-text').innerText = `Winner is ${currentWinner}!`;
+        document.getElementById('status-text').innerText = `🎉 Winner is Player: ${currentWinner}! 🎉`;
     } else {
-        document.getElementById('status-text').innerText = `Current player's turn: ${currentPlayer}`;
+        document.getElementById('status-text').innerText = `Turn: Player ${currentPlayer}`;
     }
 
     for (let r = 0; r < 3; r++) {
@@ -62,17 +62,17 @@ function renderBoard() {
             }
 
             if (!currentWinner) {
-                const isMovable = movablePieces.some(p => p[0] === r && p[1] === c);
+                const isMovable = movablePieces.some(p => parseInt(p[0]) === r && parseInt(p[1]) === c);
                 if (isMovable) {
                     cell.classList.add('movable');
                 }
             }
 
-            if (selectedPiece && selectedPiece.row === r && selectedPiece.col === c) {
+            if (selectedPiece && parseInt(selectedPiece.row) === r && parseInt(selectedPiece.col) === c) {
                 cell.classList.add('selected');
             }
 
-            const isHighlight = highlightedMoves.some(m => m[0] === r && m[1] === c);
+            const isHighlight = highlightedMoves.some(m => parseInt(m[0]) === r && parseInt(m[1]) === c);
             if (isHighlight) {
                 cell.classList.add('highlight-move');
             }
@@ -87,7 +87,7 @@ function renderBoard() {
 async function handleCellClick(row, col) {
     if (currentWinner) return; 
 
-    const isDestination = highlightedMoves.some(m => m[0] === row && m[1] === col);
+    const isDestination = highlightedMoves.some(m => parseInt(m[0]) === parseInt(row) && parseInt(m[1]) === parseInt(col));
     if (isDestination && selectedPiece) {
         let response = await fetch('/hexapown/move', {
             method: 'POST',
@@ -112,7 +112,7 @@ async function handleCellClick(row, col) {
         return;
     }
 
-    const isMovable = movablePieces.some(p => p[0] === row && p[1] === col);
+    const isMovable = movablePieces.some(p => parseInt(p[0]) === parseInt(row) && parseInt(p[1]) === parseInt(col));
     if (isMovable) {
         selectedPiece = { row, col };
         
@@ -123,7 +123,7 @@ async function handleCellClick(row, col) {
         });
         let data = await response.json();
         
-        highlightedMoves = data.moves.map(m => [m[0], m[1]]);
+        highlightedMoves = data.moves.map(m => [parseInt(m[0]), parseInt(m[1])]);
 
         renderBoard();
     } else {

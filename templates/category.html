@@ -1,1 +1,27 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <h1>{{ title }} 🕹️</h1>
+    <p>Choose a game to start playing:</p>
+
+    <div class="container">
+        {% for game in games %}
+        <div class="game-card" onclick="navigateToGame('{{ game.url }}')">
+            <h3>{{ game.name }}</h3>
+            <a href="{{ game.url }}" class="btn-play">Play Now</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <a href="/" class="btn-back">← Back to Main Menu</a>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

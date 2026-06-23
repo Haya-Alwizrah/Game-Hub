@@ -1,1 +1,21 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <h1>Welcome to Game Hub</h1>
+    <p>Select the mode you want to play:</p>
+
+    <div class="container">
+        <a href="/singleplayer" class="btn-category">Single Player Games</a>
+        <a href="/multiplayer" class="btn-category">Two Player Games</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
