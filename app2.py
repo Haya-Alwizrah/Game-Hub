@@ -166,7 +166,23 @@ def hexapawn_reset():
 # ------------------------------------------[ TicTacToe ]-----------------------------------------------------------
 @app.route('/TicTacToe')
 def tictactoe():
-    return render_template('tictactoe.html')
+    ttt.reset()
+    return render_template(
+        "tictactoe.html",
+        board=ttt.board,
+        status=ttt.get_status(),
+        game_running=ttt.game_running
+    )
+
+@app.route("/move/<int:position>")
+def move(position):
+    ttt.make_move(position)
+    return redirect(url_for("tictactoe"))
+
+@app.route("/reset")
+def reset():
+    ttt.reset()
+    return redirect(url_for("tictactoe"))
 
 # ------------------------------------------[ run ]-----------------------------------------------------------
 if __name__ == '__main__':
