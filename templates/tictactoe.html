@@ -2,12 +2,15 @@
 
 {% block title %}Tic Tac Toe{% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tictactoe.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>XO Game</h1>
+<h1>Tic Tac Toe Game</h1>
+<h2>{{ status }}</h2>
 
-    <h2>{{ status }}</h2>
-
-    <div>
+    <div class="board" id="game-board">
         {% for cell in board %}
             {% if cell == "-" and game_running %}
                 <a href="{{ url_for('move', position=loop.index0) }}">
@@ -22,11 +25,9 @@
             {% endif %}
         {% endfor %}
     </div>
-
     <br>
 
-    <a href="{{ url_for('reset') }}">
-        <button>Restart Game</button>
-    </a>
+    <a href="{{ url_for('reset') }}"><button>Restart Game</button></a>
+    <a href="/multiplayer" class="btn-back">← Back to Two Player Games</a>
 
 {% endblock %}
