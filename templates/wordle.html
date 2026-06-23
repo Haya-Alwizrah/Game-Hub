@@ -1,1 +1,51 @@
 {% extends "base.html" %}
+
+{% block title %}Game Hub{% endblock %}
+
+{% block content %}
+<div class="container">
+        <h1>Welcome to the Wordle Game</h1>
+        <p>Guess the hidden 5-letter word. After each guess, you will see whether each letter is correct or in the right position.</p>
+
+        <div class="rules">
+            <h2>Rules</h2>
+            <ul>
+                <li>Enter a 5-letter English word.</li>
+                <li>Letters in the correct position will be shown Green.</li>
+                <li>Letters that are in the word but in the wrong position will be shown in yellow.</li>
+                <li>Letters not in the word will appear in gray.</li>
+                <li>You have 6 attempts to guess the word.</li>
+            </ul>
+        </div>
+
+        <form method="post">
+            <label for="guess" class="sr-only">Your guess</label>
+            <input type="text" id="guess" name="guess" maxlength="5" placeholder="Enter your guess" required autocomplete="off">
+            <input type="submit" value="Submit Guess">
+        </form>
+
+        <form method="post" style="margin-top: 12px;">
+            <button type="submit" name="restart" value="true" class="restart-button">Play Again</button>
+        </form>
+
+        {% if message %}
+        <div class="message">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        {% if history %}
+        <div class="history">
+            <h3>Past guesses</h3>
+            {% for entry in history %}
+                <div class="guess-row">
+                    {% for tile in entry %}
+                        <span class="tile tile-{{ tile.status }}">{{ tile.letter }}</span>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <p>Attempts left: {{ attempts }}</p>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
