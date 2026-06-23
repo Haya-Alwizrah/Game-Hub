@@ -13,10 +13,12 @@ ttt = TicTacToe()
 
 app = Flask(__name__)
 
+# ------------------------------------------[ home ]-----------------------------------------------------------
 @app.route('/')
 def home():
     return render_template('home.html')
 
+# ------------------------------------------[ category ]-----------------------------------------------------------
 @app.route('/singleplayer')
 def singleplayer():
     games = [
@@ -49,8 +51,24 @@ def multiplayer():
     ]
     return render_template('category.html', title='Two Player Games', games=games)
 
+# ------------------------------------------[ Games ]-----------------------------------------------------------
+
+@app.route('/HangmanGame')
+def hangman():
+    return render_template('hangman.html')
+
+@app.route('/Wordle')
+def wordle():
+    return render_template('wordle.html')
+
+@app.route('/GuessingNumberGame')
+def guessing_number():
+    return render_template('guessing_number.html')
 
 @app.route('/hexapown')
 def hexapown():
     return render_template('hexapown.html')
 
+@app.route('/TicTacToe')
+def tictactoe():
+    return render_template('tictactoe.html')
