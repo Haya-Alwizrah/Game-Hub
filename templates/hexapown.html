@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hexapawn Game</title>
+{% extends 'base.html' %}
+
+{% block title %}Hexapown Game{% endblock %}
+
+{% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hexapown.css') }}">
-</head>
-<body>
+{% endblock %}
 
-    <h1>Hexapawn Game</h1>
+{% block content %}
+    <h1>Hexapown Game</h1>
     <div class="status" id="status-text">Loading game...</div>
-
     <div class="board" id="game-board"></div>
-
     <button class="btn-restart" onclick="resetGame()">Restart Game</button>
-    
     <a href="/multiplayer" class="btn-back">← Back to Two Player Games</a>
+{% endblock %}
 
+{% block scripts %}
     <script src="{{ url_for('static', filename='js/hexapown.js') }}"></script>
-</body>
-</html>
+{% endblock %}
