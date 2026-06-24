@@ -70,8 +70,8 @@ class Wordle:
         while self.Attempts > 0:
             guess = input("Enter Your Guess (input should be 5 letters long):").lower() #ensuring that everything inputed is lower case to avoid any miss counting from same letters
             
-            if len(guess) != 5 or not guess.isalpha(): #checks if the input is 5 letter long and all alphabetic
-                print("Invalid input. Please enter exactly 5 alphabetic letters.")
+            if len(guess) != 5 or not guess.isalpha() or not guess.isascii(): #checks if the input is 5 letter long and all alphabetic
+                print("Invalid input. Please enter exactly 5 English alphabetic letters.")
 
             else:
                 user_guess_list = [""] * 5 #creating a list of 5 empty slots to store the answer while the user did not guess the answer correctly from the first time

@@ -35,10 +35,10 @@
     {% endif %}
 
     {% if message %}
-    <div class="message animate-pop {% if 'Won' in message or 'Congrats' in message %}wordle-win{% else %}wordle-lose{% endif %}">
+    <div class="message animate-pop {% if 'Won' in message %}wordle-win{% elif 'over' in message %}wordle-lose{% else %}wordle{% endif %}">
         {% if 'Won' in message or 'Congrats' in message %}
             <h3>Winner!</h3>
-        {% else %}
+        {% elif 'over' in message %}
             <h3>Game Over</h3>
         {% endif %}
         <p>{{ message }}</p>

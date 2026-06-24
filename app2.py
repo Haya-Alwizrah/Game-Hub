@@ -75,10 +75,11 @@ def game_loop():
     wrong_guesses = session.get('hangman_wrong_guesses', 0)
     max_chances = len(hg.stages) - 1
 
-    display_word_str = " ".join([char if char in letterGuessed else "_" for char in word])
+    display_word_str = hg.display_word(word, letterGuessed)
+
     stage_visual = f"img/stage{wrong_guesses}.png"
 
-    game_over = Counter(letterGuessed) == Counter(word)
+    game_over = hg.check_win(letterGuessed, word)
     is_lost = wrong_guesses == max_chances
     show_hint = wrong_guesses == (max_chances - 1)
 
@@ -98,22 +99,17 @@ def guess():
     word = session.get('hangman_word')
     letterGuessed = session.get('hangman_letterGuessed', '')
 
-    session['hangman_msg'] = ''  # تصفير رسائل الخطأ السابقة
+    session['hangman_msg'] = ''
 
-    # تطبيق دالة validate_input الخاصة بكِ بدقة
-    if not guess_letter.isalpha():
-        session['hangman_msg'] = 'Enter only a letter!'
-    elif len(guess_letter) > 1:
-        session['hangman_msg'] = 'Enter only a single letter!'
-    elif guess_letter in letterGuessed:
+    validation_result = hg.validate_input(guess_letter, letterGuessed)
 
-        session['hangman_msg'] = 'You already guessed that letter!'
-    else:
-        # تطبيق منطق التخمين الصحيح والخاطئ من كودك الأصلي
+    if validation_result is True:
         if guess_letter in word:
             session['hangman_letterGuessed'] += guess_letter * word.count(guess_letter)
         else:
             session['hangman_wrong_guesses'] += 1
+    else:
+        session['hangman_msg'] = validation_result
 
     return redirect(url_for('game_loop'))
 
