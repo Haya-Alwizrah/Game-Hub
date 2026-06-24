@@ -169,12 +169,13 @@ class HangmanGame:
         """
         Displays the word with underscores for unguessed letters.
         """
+        result = []
         for char in word:
             if char in letterGuessed:
-                print(char, end=' ')
+                result.append(char)
             else:
-                print('_', end=' ')
-        print()
+                result.append('_')
+        return " ".join(result)
 
     def check_win(self, letterGuessed, word):
         """
@@ -187,15 +188,12 @@ class HangmanGame:
         Ensures input is a single valid letter and not repeated.
         """
         if not guess.isalpha():
-            print('Enter only a letter!')
-            return False
+            return 'Enter only a letter!'
         elif not guess.isascii():
-            print('Enter only an English letter!')
+            return 'Enter only English letter!'
         elif len(guess) > 1:
-            print('Enter only a single letter!')
-            return False
+            return 'Enter only a single letter!'
         elif guess in letterGuessed:
-            print('You already guessed that letter!')
-            return False
+            return 'You already guessed that letter!'
 
         return True
