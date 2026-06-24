@@ -58,15 +58,25 @@ def multiplayer():
     return render_template('category.html', title='Two Player Games', games=games)
 
 # ------------------------------------------[ HangmanGame ]-----------------------------------------------------------
+# Define the web route/URL for initializing or restarting the game
 @app.route('/Hangman')
 def hangman():
+    # Select random word and its color
     word, hint = random.choice(list(hg.wordlist.items()))
+
+    # Store the variables in the encrypted browser session cookie
     session['hangman_word'] = word
     session['hangman_hint'] = hint
+
+    # Initialize/Reset the player's guessed letters and wrong guesses
     session['hangman_letterGuessed'] = ''
     session['hangman_wrong_guesses'] = 0
-    session['hangman_msg'] = ''
+
+    # Clear any existing validation error messages from previous game states
+    session['hangman_msg'] = '' 
+
     return redirect(url_for('game_loop'))
+
 
 @app.route('/game')
 def game_loop():
