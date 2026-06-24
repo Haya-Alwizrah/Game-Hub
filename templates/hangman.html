@@ -42,11 +42,15 @@
             <h3 class="win-title">Congratulations!</h3>
             <p class="win-text">You saved the hangman and guessed the fruit!</p>
         </div>
+        <br>
+        <a href="/Hangman" class="btn-play">Play Again</a>
     {% elif is_lost %}
         <div class="lose-announcement animate-pop">
             <h3 class="lose-title">You Lost!</h3>
             <p class="lose-text">The hidden fruit word was: <strong>{{ secret_word }}</strong></p>
         </div>
+        <br>
+        <a href="/Hangman" class="btn-play">Play Again</a>
     {% endif %}
 
     <br>

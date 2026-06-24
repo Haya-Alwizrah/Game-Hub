@@ -13,18 +13,6 @@
     <h1 class="main-game-title">Tic Tac Toe</h1>
     <h2 class="game-status-subtitle">{{ status }}</h2>
 
-    {% if not game_running %}
-        <div class="win-announcement animate-pop">
-            {% if "winner" in status or "wins" in status or "winner is" in status %}
-                <h3 class="win-title">Congratulations!</h3>
-                <p class="win-text">{{ status }}</p>
-            {% else %}
-                <h3 class="win-title">Good Game!</h3>
-                <p class="win-text">It's a beautiful tie!</p>
-            {% endif %}
-        </div>
-    {% endif %}
-
     <div class="ttt-board">
         {% for cell in board %}
             {% if cell == "-" and game_running %}
@@ -37,8 +25,20 @@
         {% endfor %}
     </div>
 
+    {% if not game_running %}
+        <div class="win-announcement animate-pop">
+            {% if "winner" in status or "wins" in status or "winner is" in status %}
+                <h3 class="win-title">Congratulations!</h3>
+                <p class="win-text">{{ status }}</p>
+            {% else %}
+                <h3 class="win-title">Good Game!</h3>
+                <p class="win-text">It's a beautiful tie!</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
     <div style="margin-top: 25px;">
-        <a href="{{ url_for('tictactoe_reset') }}" class="btn-play secondary-btn-color link-btn-display" style="text-decoration: none; display: inline-block;">🔄 Restart Game</a>
+        <a href="{{ url_for('tictactoe_reset') }}" class="btn-play secondary-btn-color link-btn-display" style="text-decoration: none; display: inline-block;">Restart Game</a>
     </div>
     <br>
     <a href="/multiplayer" class="btn-back" style="text-decoration: none;">← Back to Two Player Games</a>
