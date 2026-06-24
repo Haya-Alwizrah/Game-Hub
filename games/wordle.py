@@ -29,8 +29,7 @@ class Wordle:
             "Entry", "Fresh", "Greet", "Habit", "Infer", "Joint", "Known", "Learn", "Model", "North",
             "Order", "Peace", "Quest", "Reach", "Scale", "Teach", "Usage", "Voice", "Watch", "Write"
         ]
-        random_selection = random.choice(words_list)  #brings the word from the word list randomly
-        return random_selection
+        return random.choice(words_list).lower()  #brings the word from the word list randomly
 
     def  _letter_in_word(self, letter, word):
         '''
@@ -67,28 +66,30 @@ class Wordle:
 
 
     def start(self):
-
         #starting the game now
         while self.Attempts > 0:
-            user_guess_list = [""] * 5 #creating a list of 5 empty slots to store the answer
-                #while the user did not guess the answer correctly from the first time
             guess = input("Enter Your Guess (input should be 5 letters long):").lower() #ensuring that everything inputed is lower case to avoid any miss counting from same letters
             
-            if len(guess) == 5 and guess.isalpha(): #checks if the input is 5 letter long and all alphabetic
+            if len(guess) != 5 or not guess.isalpha(): #checks if the input is 5 letter long and all alphabetic
+                print("Invalid input. Please enter exactly 5 alphabetic letters.")
+
+            else:
+                user_guess_list = [""] * 5 #creating a list of 5 empty slots to store the answer while the user did not guess the answer correctly from the first time
                 position =0
 
-                for letter in guess:
+                for i, letter in enumerate(guess):
                     # Case A -> correct letter in the correct positon (uppercase)
                     if self._right_position(letter, self.word, guess) == True :
-                        index = self._bring_index(guess, letter, position)
-                        user_guess_list[index] = letter.upper()
+                        user_guess_list[i] = letter.upper()
+
                     # Case B -> correct letter in the wrong position (Asteriks)
                     elif self._wrong_position(letter, self.word, guess) == True:
-                          index = self._bring_index(guess , letter, position)
-                          user_guess_list[index] = "*"+ letter.lower()+"*"
+                        user_guess_list[i] = "*"+ letter.lower()+"*"
+
                     # Case C -> letter does not exist in the word (Underscore)
                     else:
-                        user_guess_list[position] = "_" + letter + "_"
+                        user_guess_list[i] = "_" + letter + "_"
+                    
                     position += 1 #since .find() and .index() only return the first occurance of the letter, sometimes the word contain the same letter twice like in (attic), position used to track the position of each letter so repeated letter are counted too
                 
                 print(f"{user_guess_list}") #display the current guess list made
@@ -98,9 +99,6 @@ class Wordle:
                 if guess == self.word:
                     print(f"The Word of the Day is {guess} You Won! Congrats")
                     break
-
-            else:
-                print(f"Invalid Input. Please Use Exactly 5 Alphabetic Letters ")
 
         if self.Attempts == 0:
             print(f"Game Over, You Lost")
