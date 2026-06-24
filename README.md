@@ -1,6 +1,6 @@
 # Game Hub
 
-**Game Hub** is a python project for Tuwaiq AI bootcamp. the project contene 4 games
+**Game Hub** is a python project for Tuwaiq AI bootcamp.
 
 # Games:
 - single player Games:
