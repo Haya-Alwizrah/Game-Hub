@@ -134,7 +134,7 @@ class HangmanGame:
                 guess = input('Enter a letter to guess: ').lower()
 
                 # Validate input
-                if not self._validate_input(guess, letterGuessed):
+                if not self.validate_input(guess, letterGuessed):
                     continue
 
                 # Correct guess
@@ -150,11 +150,11 @@ class HangmanGame:
                         print(f"\n Hint! {hint} ")
 
                 # Show current progress
-                self._display_word(word, letterGuessed)
+                self.display_word(word, letterGuessed)
                 print()
 
                 # Check win condition
-                if self._check_win(letterGuessed, word):
+                if self.check_win(letterGuessed, word):
                     print("\nCongratulations! You guessed the word:", word)
                     break
 
@@ -169,13 +169,12 @@ class HangmanGame:
         """
         Displays the word with underscores for unguessed letters.
         """
-        result = []
         for char in word:
             if char in letterGuessed:
-                result.append(char)
+                print(char, end=' ')
             else:
-                result.append('_')
-        return " ".join(result)
+                print('_', end=' ')
+        print()
 
     def check_win(self, letterGuessed, word):
         """
@@ -188,12 +187,15 @@ class HangmanGame:
         Ensures input is a single valid letter and not repeated.
         """
         if not guess.isalpha():
-            return 'Enter only a letter!'
+            print('Enter only a letter!')
+            return False
         elif not guess.isascii():
-            return 'Enter only English letter!'
+            print('Enter only an English letter!')
         elif len(guess) > 1:
-            return 'Enter only a single letter!'
+            print('Enter only a single letter!')
+            return False
         elif guess in letterGuessed:
-            return 'You already guessed that letter!'
+            print('You already guessed that letter!')
+            return False
 
         return True
