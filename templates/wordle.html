@@ -2,6 +2,10 @@
 
 {% block title %}Wordle Game{% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wordle.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="game-card game-layout-container">
     <button class="btn-play btn-rules-top" onclick="toggleRules()">Rules</button>
