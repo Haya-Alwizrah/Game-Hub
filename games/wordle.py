@@ -2,7 +2,7 @@ import random
 class Wordle:
     '''
     Rules of The Game:
-    -6 Attwmpts to guess a hidden 5-letter word.
+    -6 Attempts to guess a hidden 5-letter word.
     - (D)   Uppercase indicate the correct letter in the correct position
     - (*d*) Asterisks indicate the letter in the word but in the wrong position
     - (_d_) Underscore indicate that the letter does not exist in the word
