@@ -114,12 +114,15 @@ def game_loop():
 
 @app.route('/guess', methods=['POST'])
 def guess():
+    
+    # Extract the character from the HTML input field
     guess_letter = request.form.get('letter', '').lower()
     word = session.get('hangman_word')
     letterGuessed = session.get('hangman_letterGuessed', '')
 
     session['hangman_msg'] = ''
 
+    # Call the class method to validate if the inputted letter is legal
     validation_result = hg.validate_input(guess_letter, letterGuessed)
 
     if validation_result is True:
