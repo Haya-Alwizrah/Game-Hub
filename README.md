@@ -18,6 +18,8 @@
 - python
 - Flask
 - Render
+- HTML, CSS
+- JavaScript
 
 # developers team:
 - Haya Alwizrah
