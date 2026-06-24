@@ -65,9 +65,3 @@ GameHub/
 - Dalia Alkharshad.
 - Summaya Hassan
 
----
-
-## License
-This project was developed for educational purposes as part of the Tuwaiq Academy AI Bootcamp.
-
-
