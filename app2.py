@@ -120,6 +120,11 @@ def guess():
 # ------------------------------------------[ Wordle ]-----------------------------------------------------------
 @app.route('/Wordle', methods=['GET', 'POST'])
 def wordle():
+    if request.method == 'GET':
+        wo.__init__()
+        session['wordle_history'] = []
+        session['wordle_message'] = ""
+
     if 'wordle_word' not in session:
         session['wordle_word'] = wo._word_of_the_day()
         session['wordle_attempts'] = 6

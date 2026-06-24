@@ -3,42 +3,68 @@
 {% block title %}Fruit Hangman{% endblock %}
 
 {% block content %}
-<div>
-    <h1>Hangman Game</h1>
-    <h3> Game Rules:</h3>
-    <ul>
-        <li>You have to guess the hidden fruit word letter by letter.</li>
-        <li>You have a limited number of chances; each wrong guess builds the hangman.</li>
-        <li>You can only type one letter at a time, and no numbers or symbols are allowed.</li>
-        <li>A special hint will appear automatically to help you before your very last chance!</li>
-    </ul>
-    <hr>
+<div class="game-card game-layout-container">
+    <button class="btn-play btn-rules-top" onclick="toggleRules()">📜 Rules</button>
 
-    <p>Guess the word! HINT: word is a fruit.</p>
-        <h2>{{ display_word }}</h2>
+    <h1 class="main-game-title">Hangman Game</h1>
+    <p class="game-description">Guess the secret fruit word letter by letter!</p>
+    
+    <div>
+        <img src="{{ url_for('static', filename=stage_visual) }}" alt="Hangman Stage" class="game-visual-img">
+    </div>
 
-    <form action="/guess" method="post">
-        <label>Enter a letter to guess: </label>
-        <input type="text" name="letter" maxlength="1" autofocus required>
-        <button type="submit">Submit</button>
+    <h2 class="secret-word-display">{{ display_word }}</h2>
+
+    {% if not game_over and not is_lost %}
+    <form action="/guess" method="post" class="game-action-form">
+        <label class="input-label-text">Enter a letter:</label>
+        <input type="text" name="letter" maxlength="1" autofocus required class="game-input-field">
+        <button type="submit" class="btn-play">Guess</button>
     </form>
+    {% endif %}
+
     {% if msg %}
-        <p><strong>Warning:</strong> {{ msg }}</p>
+        <p class="warning-text-msg">⚠️ {{ msg }}</p>
     {% endif %}
 
     {% if show_hint %}
-        <p><strong>Hint:</strong> {{ hint }}</p>
+        <div class="game-hint-box">
+            <p class="game-hint-text">💡 Hint: {{ hint }}</p>
+        </div>
     {% endif %}
 
     {% if game_over %}
-        <h2> Congratulations! You won!</h2>
-        <p><a href="/Hangman">Play Again</a></p>
+        <h2 class="win-status-text">🎉 Congratulations! You Won!</h2>
+        <a href="/Hangman" class="btn-play win-btn-color">Play Again</a>
     {% elif is_lost %}
-        <h2> You lost! The word was: {{ secret_word }}</h2>
-        <p><a href="/Hangman">Play Again</a></p>
+        <h2 class="lose-status-text">💥 You Lost!</h2>
+        <p class="reveal-word-text">The word was: <strong class="upper-word">{{ secret_word }}</strong></p>
+        <a href="/Hangman" class="btn-play">Try Again</a>
     {% endif %}
-    <br><br>
-    <img src="/static/{{ stage_visual }}" alt="Hangman Stage" width="250">
+
+    <br>
     <a href="/singleplayer" class="btn-back">← Back to Single Player Games</a>
 </div>
+
+<div id="rulesModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>📜 Game Rules</h3>
+        <ul>
+            <li>You have to guess the hidden fruit word letter by letter.</li>
+            <li>You have a limited number of chances; each wrong guess builds the hangman.</li>
+            <li>You can only type one letter at a time; no numbers or symbols are allowed.</li>
+            <li>A special hint will appear automatically to help you before your very last chance!</li>
+        </ul>
+        <button class="btn-play close-modal-btn" onclick="toggleRules()">Close & Play</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function toggleRules() {
+            const modal = document.getElementById('rulesModal');
+            modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'flex' : 'none';
+        }
+    </script>
 {% endblock %}

@@ -7,27 +7,48 @@
 {% endblock %}
 
 {% block content %}
-<h1>Tic Tac Toe Game</h1>
-<h2>{{ status }}</h2>
+<div class="game-card game-layout-container">
+    <button class="btn-play btn-rules-top" onclick="toggleRules()">📜 Rules</button>
 
-    <div class="board" id="game-board">
+    <h1 class="main-game-title">Tic Tac Toe</h1>
+    <h2 class="game-status-subtitle">{{ status }}</h2>
+
+    <div class="ttt-board">
         {% for cell in board %}
             {% if cell == "-" and game_running %}
-                <a href="{{ url_for('tictactoe_move', position=loop.index0) }}">
-                    <button>{{ cell }}</button>
-                </a>
+                <a href="{{ url_for('tictactoe_move', position=loop.index0) }}" class="ttt-cell">-</a>
             {% else %}
-                <button disabled>{{ cell }}</button>
-            {% endif %}
-
-            {% if loop.index % 3 == 0 %}
-                <br>
+                <div class="ttt-cell {% if cell == 'X' %}player-X{% elif cell == 'O' %}player-O{% endif %}" disabled>
+                    {{ cell if cell != "-" else "" }}
+                </div>
             {% endif %}
         {% endfor %}
     </div>
+
+    <a href="{{ url_for('tictactoe_reset') }}" class="btn-play secondary-btn-color link-btn-display">🔄 Restart Game</a>
     <br>
-
-    <a href="{{ url_for('tictactoe_reset') }}"><button>Restart Game</button></a>
     <a href="/multiplayer" class="btn-back">← Back to Two Player Games</a>
+</div>
 
+<div id="rulesModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>📜 Game Rules</h3>
+        <ul>
+            <li>The game is played on a grid that's 3 squares by 3 squares.</li>
+            <li>Player 1 is X, and Player 2 is O. Players take turns putting their marks in empty squares.</li>
+            <li>The first player to get 3 of their marks in a row (up, down, across, or diagonally) is the winner.</li>
+            <li>When all 9 squares are full, the game is over if no player has 3 marks in a row.</li>
+        </ul>
+        <button class="btn-play close-modal-btn" onclick="toggleRules()">Close & Play</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+function toggleRules() {
+    const modal = document.getElementById('rulesModal');
+    modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'flex' : 'none';
+}
+</script>
 {% endblock %}

@@ -2,46 +2,15 @@
 
 {% block title %}Wordle Game{% endblock %}
 
-{% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/wordle.css') }}">
-{% endblock %}
-
 {% block content %}
-<div class="container">
-<div class="container">
-        <h1>Welcome to the Wordle Game</h1>
-        <p>Guess the hidden 5-letter word. After each guess, you will see whether each letter is correct or in the right position.</p>
+<div class="game-card game-layout-container">
+    <button class="btn-play btn-rules-top" onclick="toggleRules()">📜 Rules</button>
 
-        <div class="rules">
-            <h2>Rules</h2>
-            <ul>
-                <li>Enter a 5-letter English word.</li>
-                <li>Letters in the correct position will be shown Green.</li>
-                <li>Letters that are in the word but in the wrong position will be shown in yellow.</li>
-                <li>Letters not in the word will appear in gray.</li>
-                <li>You have 6 attempts to guess the word.</li>
-            </ul>
-        </div>
+    <h1 class="main-game-title">Wordle Game</h1>
+    <p class="game-description">Guess the hidden 5-letter word within 6 attempts!</p>
 
-        <form method="post">
-            <label for="guess" class="sr-only">Your guess</label>
-            <input type="text" id="guess" name="guess" maxlength="5" placeholder="Enter your guess" required autocomplete="off">
-            <input type="submit" value="Submit Guess">
-        </form>
-
-        <form method="post" style="margin-top: 12px;">
-            <button type="submit" name="restart" value="true" class="restart-button">Play Again</button>
-        </form>
-
-        {% if message %}
-        <div class="message">
-            {{ message }}
-        </div>
-        {% endif %}
-
+    <div class="wordle-grid">
         {% if history %}
-        <div class="history">
-            <h3>Past guesses</h3>
             {% for entry in history %}
                 <div class="guess-row">
                     {% for tile in entry %}
@@ -49,8 +18,52 @@
                     {% endfor %}
                 </div>
             {% endfor %}
-            <p>Attempts left: {{ attempts }}</p>
-        </div>
         {% endif %}
     </div>
+
+    <p class="attempts-left-msg">Attempts left: <strong class="highlight-count">{{ attempts }}</strong></p>
+
+    {% if attempts > 0 and "Won" not in message and "Game Over" not in message %}
+    <form method="post" class="game-action-form">
+        <input type="text" id="guess" name="guess" maxlength="5" placeholder="5 Letters" required autocomplete="off" class="game-input-field wordle-input-field">
+        <button type="submit" class="btn-play">Submit</button>
+    </form>
+    {% endif %}
+
+    {% if message %}
+        <div class="game-message-box {% if 'Won' in message %}win-msg-color{% else %}lose-msg-color{% endif %}">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <form method="post" class="restart-form-block">
+        <button type="submit" name="restart" value="true" class="btn-play secondary-btn-color">🔄 Play Again</button>
+    </form>
+
+    <br>
+    <a href="/singleplayer" class="btn-back">← Back to Single Player Games</a>
+</div>
+
+<div id="rulesModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>📜 Game Rules</h3>
+        <ul>
+            <li>Enter a valid 5-letter English word.</li>
+            <li><span class="tile-correct-label">Green Tiles</span> mean the letter is correct and in the right position.</li>
+            <li><span class="tile-present-label">Yellow Tiles</span> mean the letter is in the word but in the wrong position.</li>
+            <li><span class="tile-absent-label">Gray Tiles</span> mean the letter does not exist in the word.</li>
+            <li>You have exactly 6 attempts to guess the hidden word.</li>
+        </ul>
+        <button class="btn-play close-modal-btn" onclick="toggleRules()">Close & Play</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function toggleRules() {
+    const modal = document.getElementById('rulesModal');
+    modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'flex' : 'none';
+}
+</script>
 {% endblock %}

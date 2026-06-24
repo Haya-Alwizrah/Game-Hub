@@ -126,3 +126,85 @@ h1 {
 .btn-back:hover {
     color: #fff;
 }
+
+.hexapawn-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn-rules-hexapawn {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    background: #0984e3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.hexapawn-modal-overlay {
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.8); 
+    backdrop-filter: blur(5px); 
+    z-index: 1000; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.hexapawn-modal-content {
+    width: 90%; 
+    max-width: 450px; 
+    background: #1e1e2f; 
+    border: 2px solid #00d2d3; 
+    border-radius: 16px;
+    text-align: left; 
+    padding: 25px; 
+    box-shadow: 0 10px 30px rgba(0, 210, 211, 0.2);
+}
+
+.hexapawn-modal-content h3 {
+    color: #00d2d3;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.hexapawn-modal-content ul {
+    color: #b2bec3;
+    font-size: 1rem;
+    line-height: 1.6;
+    padding-left: 20px;
+    margin-bottom: 25px;
+    font-family: sans-serif;
+}
+
+.hexapawn-modal-content li {
+    direction: ltr;
+    margin-bottom: 8px;
+}
+
+.btn-close-hexapawn {
+    width: 100%;
+    padding: 12px;
+    background: #e17055;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
