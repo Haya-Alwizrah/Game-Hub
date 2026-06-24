@@ -80,17 +80,26 @@ def hangman():
 
 @app.route('/game')
 def game_loop():
+    
+    # Retrieve from the active session storage
     word = session.get('hangman_word')
     letterGuessed = session.get('hangman_letterGuessed', '')
     wrong_guesses = session.get('hangman_wrong_guesses', 0)
+    
     max_chances = len(hg.stages) - 1
 
+    # Call the class method to format the word into characters and underscores
     display_word_str = hg.display_word(word, letterGuessed)
 
     stage_visual = f"img/stage{wrong_guesses}.png"
 
+    # Call your OOP class method to check if the win condition is met
     game_over = hg.check_win(letterGuessed, word)
+
+    # Determine if the user has completely run out of guessing chances
     is_lost = wrong_guesses == max_chances
+
+    # Condition to show the color hint exactly one turn before potential loss
     show_hint = wrong_guesses == (max_chances - 1)
 
     return render_template('hangman.html',
