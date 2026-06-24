@@ -42,7 +42,11 @@ function renderBoard() {
     boardDiv.innerHTML = ''; 
 
     if (currentWinner) {
-        document.getElementById('status-text').innerText = `Winner is Player: ${currentWinner}!`;
+        document.getElementById('status-text').innerHTML = `
+            <div class="win-announcement animate-pop" style="background: linear-gradient(135deg, #f1c40f, #f39c12); color: #2d3436; padding: 15px; border-radius: 10px;"> 
+                <strong>Player ${currentWinner} Wins the Match!</strong> 
+            </div>
+        `;
     } else {
         document.getElementById('status-text').innerText = `Turn: Player ${currentPlayer}`;
     }

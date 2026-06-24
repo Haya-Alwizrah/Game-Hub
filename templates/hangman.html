@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="game-card game-layout-container">
-    <button class="btn-play btn-rules-top" onclick="toggleRules()">📜 Rules</button>
+    <button class="btn-play btn-rules-top" onclick="toggleRules()">Rules</button>
 
     <h1 class="main-game-title">Hangman Game</h1>
     <p class="game-description">Guess the secret fruit word letter by letter!</p>
@@ -24,22 +24,25 @@
     {% endif %}
 
     {% if msg %}
-        <p class="warning-text-msg">⚠️ {{ msg }}</p>
+        <p class="warning-text-msg">{{ msg }}</p>
     {% endif %}
 
     {% if show_hint %}
         <div class="game-hint-box">
-            <p class="game-hint-text">💡 Hint: {{ hint }}</p>
+            <p class="game-hint-text">Hint: {{ hint }}</p>
         </div>
     {% endif %}
 
     {% if game_over %}
-        <h2 class="win-status-text">🎉 Congratulations! You Won!</h2>
-        <a href="/Hangman" class="btn-play win-btn-color">Play Again</a>
+        <div class="win-announcement animate-pop" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+            <h3 class="win-title">Congratulations!</h3>
+            <p class="win-text">You saved the hangman and guessed the fruit!</p>
+        </div>
     {% elif is_lost %}
-        <h2 class="lose-status-text">💥 You Lost!</h2>
-        <p class="reveal-word-text">The word was: <strong class="upper-word">{{ secret_word }}</strong></p>
-        <a href="/Hangman" class="btn-play">Try Again</a>
+        <div class="win-announcement animate-pop" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+            <h3 class="win-title">You Lost!</h3>
+            <p class="win-text">The hidden fruit word was: <strong>{{ secret_word }}</strong></p>
+        </div>
     {% endif %}
 
     <br>
@@ -48,7 +51,7 @@
 
 <div id="rulesModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>📜 Game Rules</h3>
+        <h3>Rules</h3>
         <ul>
             <li>You have to guess the hidden fruit word letter by letter.</li>
             <li>You have a limited number of chances; each wrong guess builds the hangman.</li>

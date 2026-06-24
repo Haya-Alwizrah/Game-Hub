@@ -45,6 +45,9 @@ def singleplayer():
 
 @app.route('/multiplayer')
 def multiplayer():
+
+    session.pop('ttt_playing', None)
+
     games = [
         {
             'name': 'Hexa Pawn',
@@ -122,14 +125,10 @@ def guess():
 def wordle():
     if request.method == 'GET':
         wo.__init__()
-        session['wordle_history'] = []
-        session['wordle_message'] = ""
-
-    if 'wordle_word' not in session:
-        session['wordle_word'] = wo._word_of_the_day()
-        session['wordle_attempts'] = 6
         session['wordle_history'] = [] #used to store the history of the player's previous guesses and color code the results
-        
+        session['wordle_attempts'] = 6
+        session['wordle_word'] = wo._word_of_the_day()
+ 
     message = ""
     
     if request.method == 'POST':
@@ -220,7 +219,10 @@ def hexapawn_reset():
 # ------------------------------------------[ TicTacToe ]-----------------------------------------------------------
 @app.route('/TicTacToe')
 def tictactoe():
-    ttt.reset()
+    if 'ttt_playing' not in session:
+        ttt.reset()
+        session['ttt_playing'] = True
+
     return render_template(
         "tictactoe.html",
         board=ttt.board,
@@ -228,14 +230,16 @@ def tictactoe():
         game_running=ttt.game_running
     )
 
-@app.route("/move/<int:position>")
+@app.route("/tictactoe_move/<int:position>")
 def tictactoe_move(position):
+    session['ttt_playing'] = True
     ttt.make_move(position)
     return redirect(url_for("tictactoe"))
 
-@app.route("/reset")
+@app.route("/tictactoe_reset")
 def tictactoe_reset():
     ttt.reset()
+    session['ttt_playing'] = True
     return redirect(url_for("tictactoe"))
 
 # ------------------------------------------[ run ]-----------------------------------------------------------

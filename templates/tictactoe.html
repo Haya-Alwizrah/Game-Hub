@@ -2,50 +2,58 @@
 
 {% block title %}Tic Tac Toe{% endblock %}
 
-{% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tictactoe.css') }}">
-{% endblock %}
-
 {% block content %}
-<div class="game-card game-layout-container">
-    <button class="btn-play btn-rules-top" onclick="toggleRules()">📜 Rules</button>
+<div class="game-card game-layout-container" style="width: auto; max-width: 500px; margin: 0 auto;">
+    <button class="btn-play btn-rules-top" onclick="toggleRules()">Rules</button>
 
     <h1 class="main-game-title">Tic Tac Toe</h1>
     <h2 class="game-status-subtitle">{{ status }}</h2>
 
+    {% if not game_running %}
+        <div class="win-announcement animate-pop">
+            {% if "winner" in status or "wins" in status or "winner is" in status %}
+                <h3 class="win-title">Congratulations!</h3>
+                <p class="win-text">{{ status }}</p>
+            {% else %}
+                <h3 class="win-title">Good Game!</h3>
+                <p class="win-text">It's a beautiful tie!</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
     <div class="ttt-board">
         {% for cell in board %}
             {% if cell == "-" and game_running %}
-                <a href="{{ url_for('tictactoe_move', position=loop.index0) }}" class="ttt-cell">-</a>
+                <a href="{{ url_for('tictactoe_move', position=loop.index0) }}" class="ttt-cell"></a>
             {% else %}
-                <div class="ttt-cell {% if cell == 'X' %}player-X{% elif cell == 'O' %}player-O{% endif %}" disabled>
+                <div class="ttt-cell {% if cell == 'X' %}player-X{% elif cell == 'O' %}player-O{% endif %}">
                     {{ cell if cell != "-" else "" }}
                 </div>
             {% endif %}
         {% endfor %}
     </div>
 
-    <a href="{{ url_for('tictactoe_reset') }}" class="btn-play secondary-btn-color link-btn-display">🔄 Restart Game</a>
+    <div style="margin-top: 25px;">
+        <a href="{{ url_for('tictactoe_reset') }}" class="btn-play secondary-btn-color link-btn-display" style="text-decoration: none; display: inline-block;">🔄 Restart Game</a>
+    </div>
     <br>
-    <a href="/multiplayer" class="btn-back">← Back to Two Player Games</a>
+    <a href="/multiplayer" class="btn-back" style="text-decoration: none;">← Back to Two Player Games</a>
 </div>
 
-<div id="rulesModal" class="modal-overlay">
+<div id="rulesModal" class="modal-overlay" style="display: none;">
     <div class="modal-content">
-        <h3>📜 Game Rules</h3>
-        <ul>
-            <li>The game is played on a grid that's 3 squares by 3 squares.</li>
-            <li>Player 1 is X, and Player 2 is O. Players take turns putting their marks in empty squares.</li>
-            <li>The first player to get 3 of their marks in a row (up, down, across, or diagonally) is the winner.</li>
-            <li>When all 9 squares are full, the game is over if no player has 3 marks in a row.</li>
+        <h3>Rules</h3>
+        <ul style="text-align: left; margin: 15px 0; padding-left: 20px;">
+            <li>The game is played on a 3x3 grid.</li>
+            <li>Player 1 is X, and Player 2 is O. Players take turns.</li>
+            <li>The first player to get 3 marks in a row (horizontally, vertically, or diagonally) wins!</li>
+            <li>If all 9 squares are full and no player has 3 in a row, the game ends in a tie.</li>
         </ul>
         <button class="btn-play close-modal-btn" onclick="toggleRules()">Close & Play</button>
     </div>
 </div>
-{% endblock %}
 
-{% block scripts %}
-    <script>
+<script>
 function toggleRules() {
     const modal = document.getElementById('rulesModal');
     modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'flex' : 'none';

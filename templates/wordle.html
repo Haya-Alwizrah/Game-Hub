@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="game-card game-layout-container">
-    <button class="btn-play btn-rules-top" onclick="toggleRules()">📜 Rules</button>
+    <button class="btn-play btn-rules-top" onclick="toggleRules()">Rules</button>
 
     <h1 class="main-game-title">Wordle Game</h1>
     <p class="game-description">Guess the hidden 5-letter word within 6 attempts!</p>
@@ -31,13 +31,18 @@
     {% endif %}
 
     {% if message %}
-        <div class="game-message-box {% if 'Won' in message %}win-msg-color{% else %}lose-msg-color{% endif %}">
-            {{ message }}
-        </div>
+    <div class="message animate-pop {% if 'Won' in message or 'Congrats' in message %}wordle-win{% else %}wordle-lose{% endif %}">
+        {% if 'Won' in message or 'Congrats' in message %}
+            <h3>Winner!</h3>
+        {% else %}
+            <h3>Game Over</h3>
+        {% endif %}
+        <p>{{ message }}</p>
+    </div>
     {% endif %}
 
     <form method="post" class="restart-form-block">
-        <button type="submit" name="restart" value="true" class="btn-play secondary-btn-color">🔄 Play Again</button>
+        <button type="submit" name="restart" value="true" class="btn-play secondary-btn-color">Play Again</button>
     </form>
 
     <br>
@@ -46,7 +51,7 @@
 
 <div id="rulesModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>📜 Game Rules</h3>
+        <h3>Game Rules</h3>
         <ul>
             <li>Enter a valid 5-letter English word.</li>
             <li><span class="tile-correct-label">Green Tiles</span> mean the letter is correct and in the right position.</li>
