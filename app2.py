@@ -170,8 +170,6 @@ def wordle():
     
     return render_template('wordle.html', attempts= session['wordle_attempts'], history = session['wordle_history'], message = message)
 
-
-
 # ------------------------------------------[ GuessingNumberGame ]-----------------------------------------------------------
 @app.route('/Guessing-Number')
 def guessing_number():
@@ -226,12 +224,12 @@ def tictactoe():
     )
 
 @app.route("/move/<int:position>")
-def move(position):
+def tictactoe_move(position):
     ttt.make_move(position)
     return redirect(url_for("tictactoe"))
 
 @app.route("/reset")
-def reset():
+def tictactoe_reset():
     ttt.reset()
     return redirect(url_for("tictactoe"))
 

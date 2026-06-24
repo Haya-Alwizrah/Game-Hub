@@ -13,7 +13,7 @@
     <div class="board" id="game-board">
         {% for cell in board %}
             {% if cell == "-" and game_running %}
-                <a href="{{ url_for('move', position=loop.index0) }}">
+                <a href="{{ url_for('tictactoe_move', position=loop.index0) }}">
                     <button>{{ cell }}</button>
                 </a>
             {% else %}
@@ -27,7 +27,7 @@
     </div>
     <br>
 
-    <a href="{{ url_for('reset') }}"><button>Restart Game</button></a>
+    <a href="{{ url_for('tictactoe_reset') }}"><button>Restart Game</button></a>
     <a href="/multiplayer" class="btn-back">← Back to Two Player Games</a>
 
 {% endblock %}
