@@ -36,10 +36,7 @@ def singleplayer():
             'name': 'Wordle',
             'url': '/Wordle'
         },
-        {
-            'name': 'Guessing Number',
-            'url': '/Guessing-Number'
-        }
+        # {'name': 'Guessing Number', 'url': '/Guessing-Number'}
     ]
     return render_template('category.html', title='Single Player Games', games=games)
 

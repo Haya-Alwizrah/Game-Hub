@@ -44,7 +44,7 @@
 .tile-absent { background: rgba(255, 255, 255, 0.15) !important; border-color: transparent !important; color: #636e72 !important; }
 
 .wordle-win {
-    background-color: #2ecc71 !important;
+    background-color: #42d2a5 !important;
     color: white !important;
     border-radius: 10px;
     padding: 15px;
@@ -60,6 +60,12 @@
     font-size: 1.2rem;
     box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
     margin: 20px 0;
+}
+.wordle-win p{
+    color: white !important;
+}
+.wordle-lose p{
+    color: white !important;
 }
 
 .restart-form-block {
