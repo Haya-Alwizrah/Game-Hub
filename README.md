@@ -20,18 +20,18 @@
 # Available Games:
 ### Single Player Games:
 
-#### Hangman:
+- Hangman:
 A classic word-guessing game where the player tries to discover the hidden word before running out of attempts.
 
-#### Wordle:
+- Wordle:
 Guess the secret word within a limited number of tries using letter-position feedback.
 
 ### Multiplayer Games:
 
-#### Tic Tac Toe:
+- Tic Tac Toe:
 A two-player strategy game played on a 3×3 board.
 
-#### Hexapawn:
+- Hexapawn:
 A simplified chess-inspired game that focuses on pawn movement and strategic decision-making.
 
 ---
