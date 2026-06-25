@@ -100,3 +100,10 @@ class TicTacToe:
         self.current_player = "X"
         self.winner = None
         self.game_running = True
+
+"""
+Reflection:
+- The most challenging part was checking all winning conditions correctly.
+- The concept I enjoyed the most was using functions and organizing the code inside a class.
+- If I had more time, I would allow players to play again without restarting the program, and making the game interface more user-friendly.
+"""
