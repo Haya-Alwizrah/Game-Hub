@@ -5,6 +5,8 @@
 **Live Demo:**
 [Play Game Hub](https://gamehub-v0vs.onrender.com)
 
+---
+
 ## Features
 
 - Multiple playable games in one platform
@@ -60,8 +62,8 @@ GameHub/
 ---
 
 ## developers team:
-- Haya Alwizrah
-- Raghad Alharbi
-- Dalia Alkharshad.
-- Summaya Hassan
+- [Haya Alwizrah](https://github.com/Haya-Alwizrah)
+- [Raghad Alharbi](https://github.com/rgdalharbi4)
+- [Dalia Alkharshad](https://github.com/daliaalkharshad)
+- [Summaya Hassan](https://github.com/soso20042004)
 
