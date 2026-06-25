@@ -167,3 +167,16 @@ class HexaPown:
         """
         for i in self.board:
             print(i)
+
+'''
+Reflection:
+What was the most challenging part?
+- Integrating the game logic with the Flask
+
+Which concept did you enjoy the most?
+- Designing and implementing the logic for calculating available moves for each piece
+
+What would you improve if you had more time?
+- I would scale the project up to develop a Chess game
+- Add option to play aganist AI with MinMax algorithm
+'''
