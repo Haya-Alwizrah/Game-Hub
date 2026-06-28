@@ -1,6 +1,6 @@
 # Game Hub
 
-**Game Hub** is a collection of classic games developed in Python as part of the Tuwaiq Academy AI Bootcamp. The project combines game development concepts with clean object-oriented design and web deployment using Flask.
+**Game Hub** is a collection of classic games developed in Python as part of the Tuwaiq Academy (Data Science and Artificial Intelligence) Bootcamp. The project combines game development concepts with clean object-oriented design and web deployment using Flask.
 
 **Live Demo:**
 [Play Game Hub](https://gamehub-v0vs.onrender.com)
